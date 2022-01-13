@@ -17,6 +17,24 @@ const randomFunction = {
 const minLength = 4;
 const maxLength = 20;
 
+clipboardBtn.addEventListener('click', () => {
+    const textArea = document.createElement('textarea');
+    const password = resultEl.innerText;
+
+    if (!password) {
+        return;
+    } else {
+        textArea.value = password;
+        document.body.appendChild(textArea);
+        textArea.select();
+        // deprecated
+        // document.execCommand('copy');
+        navigator.clipboard.writeText(textArea.value);
+        textArea.remove();
+        alert('Password copied to clipboard');
+    }
+});
+
 generateBtn.addEventListener('click', () => {
     const length = +lengthEl.value > 20 ? 20 : +lengthEl.value < 4 ? 4 : +lengthEl.value;
     const hasLower = lowercaseEl.checked;
